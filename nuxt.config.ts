@@ -9,12 +9,14 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true
   },
-  modules: ['@primevue/nuxt-module', '@nuxt/eslint'],
+
+  modules: ['@primevue/nuxt-module', '@nuxt/eslint', '@pinia/nuxt'],
   eslint: {
     config: {
       stylistic: true
     }
   },
+
   primevue: {
     autoImport: true,
     options: {

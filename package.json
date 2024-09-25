@@ -15,12 +15,14 @@
   },
   "dependencies": {
     "@nuxt/eslint": "^0.5.7",
+    "@pinia/nuxt": "^0.5.4",
     "@primevue/nuxt-module": "^4.0.7",
     "@primevue/themes": "^4.0.7",
     "nuxt": "^3.13.0",
+    "pinia": "^2.2.2",
     "primeicons": "^7.0.0",
-    "vue": "latest",
-    "vue-router": "latest"
+    "vue": "^3.5.8",
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.7.0",
