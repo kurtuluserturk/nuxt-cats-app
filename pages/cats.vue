@@ -20,6 +20,11 @@ import { onMounted } from 'vue'
 import { useCatStore } from '~/stores/catStore'
 import { useAuthStore } from '~/stores/authStore'
 
+// we defined auth middleware
+definePageMeta({
+  middleware: 'auth',
+})
+
 const catStore = useCatStore()
 const authStore = useAuthStore()
 
