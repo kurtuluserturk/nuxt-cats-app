@@ -32,7 +32,16 @@ const catStore = useCatStore()
 const authStore = useAuthStore()
 const toast = useToast()
 
-const transitions = [
+interface Transition {
+  enterActive: string
+  enterFrom: string
+  enterTo: string
+  leaveActive: string
+  leaveFrom: string
+  leaveTo: string
+}
+
+const transitions: Transition[] = [
   {
     enterActive: 'transition-opacity duration-500 ease-in-out',
     enterFrom: 'opacity-0',
@@ -59,7 +68,7 @@ const transitions = [
   },
 ]
 
-const currentTransition = ref(transitions[0])
+const currentTransition = ref<Transition>(transitions[0])
 const isLoading = ref<boolean>(false)
 
 const showError = () => {
