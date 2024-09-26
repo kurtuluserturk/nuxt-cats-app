@@ -1,9 +1,11 @@
 <template>
   <div class="relative min-h-screen w-full mt-3">
+    <Toast />
+
     <Button @click="logout" icon="pi pi-sign-out" label="Çıkış Yap" severity="danger" class="!absolute top-0 right-3" />
 
     <div class="flex flex-col justify-center items-start gap-y-3 h-[calc(100%-300px)] px-2">
-      <Button @click="changeCat" icon="pi pi-refresh" label="Değiştir" />
+      <Button @click="changeCat" icon="pi pi-refresh" label="Değiştir" :loading="isLoading" />
 
       <Transition :enter-active-class="currentTransition.enterActive" :enter-from-class="currentTransition.enterFrom"
         :enter-to-class="currentTransition.enterTo" :leave-active-class="currentTransition.leaveActive"
@@ -19,6 +21,7 @@
 import { onMounted } from 'vue'
 import { useCatStore } from '~/stores/catStore'
 import { useAuthStore } from '~/stores/authStore'
+import { useToast } from "primevue/usetoast"
 
 // we defined auth middleware
 definePageMeta({
@@ -27,6 +30,7 @@ definePageMeta({
 
 const catStore = useCatStore()
 const authStore = useAuthStore()
+const toast = useToast()
 
 const transitions = [
   {
@@ -56,12 +60,25 @@ const transitions = [
 ]
 
 const currentTransition = ref(transitions[0])
+const isLoading = ref<boolean>(false)
 
-const changeCat = () => {
-  catStore.fetchRandomCat()
+const showError = () => {
+  toast.add({ severity: 'error', summary: 'Hata Mesajı', detail: 'Kedi yüklenirken bir hata oluştu', life: 3000 })
+}
 
-  const randomIndex = Math.floor(Math.random() * transitions.length)
-  currentTransition.value = transitions[randomIndex]
+const changeCat = async () => {
+  isLoading.value = true
+  try {
+    await catStore.fetchRandomCat()
+
+    const randomIndex = Math.floor(Math.random() * transitions.length)
+    currentTransition.value = transitions[randomIndex]
+  } catch (error) {
+    console.error(error)
+    showError()
+  } finally {
+    isLoading.value = false
+  }
 }
 
 const logout = async () => {
