@@ -5,6 +5,9 @@ import Aura from '@primevue/themes/aura'
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+  runtimeConfig: {
+    myProxyUrl: 'https://api.thecatapi.com/v1/'
+  },
   css: ['~/assets/styles/main.css'],
   postcss: {
     plugins: {
@@ -15,14 +18,12 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true
   },
-
   modules: ['@primevue/nuxt-module', '@nuxt/eslint', '@pinia/nuxt'],
   eslint: {
     config: {
       stylistic: true
     }
   },
-
   primevue: {
     autoImport: true,
     options: {
