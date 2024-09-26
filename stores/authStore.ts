@@ -18,7 +18,7 @@ export const useAuthStore = defineStore('auth', {
           this.token = 'fake-jwt-token'
           resolve()
         } else {
-          reject('Kullanıcı adı veya şifre yanlış.')
+          reject('Kullanıcı adı veya şifre yanlış!')
         }
       })
     },
